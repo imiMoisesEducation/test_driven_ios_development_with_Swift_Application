@@ -102,4 +102,26 @@ class ItemManagerTests: XCTestCase {
         XCTAssertNotEqual(firstItem, secondItem,"Locations should not be equal")
     }
     
+    func testRemoveAllItems_ShouldResultInCountsBeZero()
+    {
+        sut.add(item: ToDoItem(title: "First"))
+        sut.add(item: ToDoItem(title: "Second"))
+        sut.checkItemAt(index: 0)
+            
+        XCTAssertEqual(sut.toDoCount, 1,"toDoCount should be 1")
+        XCTAssertEqual(sut.doneCount,1,"doneCount should be 1")
+        
+        sut.removeAllItems()
+        
+        XCTAssertEqual(sut.toDoCount, 0,"toDoCount should be 0")
+        XCTAssertEqual(sut.doneCount,0,"doneCount should be 0")
+    }
+    
+    func testAddingTheSameItem_DoesNotIncreaseCount(){
+        sut.add(item: ToDoItem(title: "First"))
+        sut.add(item: ToDoItem(title: "First"))
+        
+        XCTAssertEqual(sut.toDoCount, 1)
+    }
+    
 }
